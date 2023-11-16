@@ -1,0 +1,54 @@
+label{
+    color:white;
+}
+#fil:hover{
+    font-size:15px;
+  }
+  #ad:hover{
+    font-size:15px;
+  }
+
+.des{
+margin-top: 4%;
+display: flex;
+
+}
+.dados{
+flex: 40%;
+background:  rgb(44, 43, 43);
+margin-right: 2%;
+padding: 0 40px 20px 40px;
+border-radius: 20px;
+}
+.atividades{
+flex: 50%;
+background:  rgb(44, 43, 43);
+color: white;
+border-radius: 20px;
+padding:0 10px;
+}
+.graficos{
+display: flex; 
+
+height: 70%;
+
+}
+.g-bi{
+flex: 40%;
+background:  rgb(65, 64, 64);
+margin-right: 3%;
+border-radius: 20px;
+
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19); 
+}
+.g-incoformidade{
+
+flex: 40%;
+background: rgb(243, 240, 240);  
+border-radius: 10px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19); 
+
+}
+.atividades span{
+font-weight: 700;
+}

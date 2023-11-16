@@ -1,0 +1,663 @@
+*{
+    box-sizing: border-box;
+
+}
+body{
+    margin: 0;
+   padding: 0;
+   background: whitesmoke;
+
+}
+
+header{
+    display: flex;
+    flex-flow: row wrap;
+    box-shadow: 0 0  1px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0,0, 0, 0.19);
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+
+}
+a{
+    text-decoration: none;
+}
+.hamburgue{
+    flex: 10%;
+    
+text-align: center;
+    
+}
+.hamburgue i{
+font-size:30px;
+color: black;
+
+}
+
+.logo{
+flex:40%;
+
+     text-align: left;
+
+}
+
+.logo img{
+    width: 40%;
+    height: 40%;
+  
+    margin-left: 1%;
+}
+
+.menu{
+flex: 50%;
+
+
+
+}
+.menu ul{
+    list-style: none;
+   
+    text-align: right;
+    margin: auto;
+    padding: 20px;
+    
+
+
+
+
+}
+.menu ul li{
+    display: inline-block;
+    margin-right: 3%;
+    border-radius: 30px;
+    padding: 10px;
+    border: 1px solid black;
+
+    color: black;
+   
+   
+}
+
+
+ ul li i{
+    font-size: 20px;
+
+}
+.menu ul li:hover{
+    color:white;
+    background: #2B2B2B;
+}
+.menu ul  #sair{
+    margin-right: 9%;
+}
+
+
+.siderbar{
+
+position: fixed;
+    display: inline-block;
+    width: 9%;
+    height: 100%;
+    background-color:rgb(31, 28, 28);
+border-top-right-radius: 20px;
+border-bottom-right-radius:20px;
+overflow: auto;
+
+
+
+}
+.siderbar .mini{
+    display: none ;
+}
+
+
+
+@keyframes animacao{
+    from{background-color: #2B2B2B;width:9%;}
+    to{background-color: rgb(19, 16, 16);  width: 14%;}
+}
+
+
+.siderbar ul{
+    list-style: none;
+ padding-left:5px ;
+ text-align: center;
+
+ overflow: hidden;
+ text-overflow: ellipsis;
+
+}
+
+aside ul  a {
+    text-decoration: none;
+}
+
+.siderbar ul li{
+   margin-top: 10px;
+   padding: 20px;
+
+}
+
+
+
+
+.siderbar ul li:hover{
+    background:#2B2B2B;
+    border-left: 5px solid #999595;
+}
+.siderbar ul li .icon{
+    display: inline-block;
+    
+   
+    color:#e0d9d9;
+    font-size: 20px;
+}
+
+.siderbar ul li .titulo{
+ 
+   display: none;
+
+
+    
+}
+
+
+.transicao-sider{
+   animation-name: animacao;
+   animation-duration: 3s;
+   animation-fill-mode: forwards;
+
+   
+   overflow: hidden;
+text-overflow: ellipsis;
+  
+}
+.transicao-sider ul{
+    text-align: left;
+}
+
+
+.transicao-sider ul li .titulo{
+    display: inline-block;
+   
+    margin-left: 5px;
+    color: white;
+    font-weight: bold;
+   
+
+
+}
+
+main{
+   
+   
+    margin-left: 10%;
+   
+   
+    padding: 10px;
+    margin-right: 5%;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+   
+   
+}
+
+
+.transicao-main{
+    margin-left: 20%;
+   
+}
+
+
+
+
+
+main .formulario{
+    background: white;
+width: 40%;
+height: 75vh;
+margin: auto;
+border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+
+overflow: auto;
+
+
+
+
+
+}
+main .formulario .form{
+
+    margin: 30px;
+
+   
+
+}
+main .formulario .form h5{
+    margin: 10px 0;
+    text-align: center;
+     color:rgb(92, 92, 92) ;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+main .formulario .form input{
+    margin-bottom: 10px;
+
+}
+
+
+main .tabela{
+    margin-top: 20px ;
+    overflow: auto;
+}
+
+
+    .btn-principal{
+  
+   
+        color:white;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+      .btn-principal:hover{
+        font-size: 18px;
+      }
+      
+      
+      
+      .centro{
+      margin-top: 20px;
+        text-align: center;
+       font-family: Arial, Helvetica, sans-serif;
+       display: flex;
+
+       flex-flow: row wrap;
+      }
+      .centro .butao-del{
+        flex: 40%;
+
+        border: 1px solid blue;
+      }
+      .centro .butao_edi{
+        flex: 40%;
+        }
+
+        .butao-salvar{
+            margin-left: 45%;
+        }
+        
+     #fil{
+        margin-top: 15px;
+        margin-top: 15px;
+        display: inline-block;
+        margin-bottom: 20px;
+        margin-left: 0;
+        width: auto;
+        margin-right: 10px;
+        background:  #2B2B2B;
+        color: white;
+        font-weight: bold;
+        border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+        
+      }
+      #fil:hover{
+        font-size: 18px;
+      }
+      #fil span{
+    
+        text-align: center;
+        display: inline-block;
+       
+        margin-top: 6px;
+      }
+      
+    
+    #ad{
+      
+        background-color:deepskyblue;
+        width: auto;
+        margin-left: 12px;
+        margin-right: 6%;
+        margin-top: 15px;
+    display: inline-block;
+    margin-bottom: 20px;
+    
+    }
+    
+
+#ad span{
+    display: inline-block;
+}
+#ad i{
+    display: inline-block;
+padding-right: 5px;
+}
+.filtros{
+    margin-top: 5%;
+}
+
+
+
+.tabela a{
+      text-decoration: none;
+     padding: 5px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+.tabela .deletar{
+
+  
+    background: red;
+   
+}
+.tabela .editar{
+    background: green;
+}
+
+
+
+
+
+
+.cont-dash-1{
+    display: flex;
+    flex-flow: row wrap;
+   
+    height: auto;
+
+}
+.cont-dash-2{
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+   
+    height: auto;
+
+}
+
+
+
+.inser-mes{
+    flex: 30%;
+  
+background: white;
+margin-right: 2%;
+height: 42vh;
+border-radius: 20px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+
+
+}
+
+.quanto-sexo{
+    flex: 20%;
+    background:white;
+    margin-left: 2%;
+    height: 42vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+
+}
+.numerodado{
+    flex:15%;
+    margin-left: 1%;
+   height: 25vh;
+    width: 30vh;
+    border-radius: 20px;
+ text-align: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+background: rgb(100, 99, 99);
+color: white;
+text-align: center;
+
+
+}
+
+.numerodado a {
+    text-decoration: none; 
+    color: white;
+}
+.numerodado a span{
+
+    display:block;
+   margin-top: 20px;
+   font-weight: bold;
+   font-size: 18px;
+   padding-left: 0;
+     padding: 15px;
+   
+}
+.indice-idade{
+  
+     background: white;
+    flex: 48%;
+    margin-right: 2%;
+    height: 42vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+
+}
+
+
+.quanti-dados{
+
+    background: rgb(37, 37, 37);
+    flex: 48%;
+    margin-left: 2%;
+   
+    border-radius: 20px;
+    height: 42vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+
+}
+
+
+main .analise{
+    display: flex;
+    flex-grow: row wrap;
+
+
+
+}
+ main .analise .formulario-analise{
+   
+    flex: 40%;
+    background: white;
+    height: 75vh;
+  
+    border-radius: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0, 0, 0.19);
+    
+   overflow-y: auto;
+   overflow-x: none;
+   padding: 2%;
+}
+
+main .formulario-analise h5{
+    margin: 10px 0;
+    text-align: center;
+     color:rgb(92, 92, 92) ;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+main .formulario-analise h3{
+    text-align: center;
+    margin-bottom: 1.5%;
+}
+main .formulario-analise input{
+    margin-bottom: 10px;
+
+}
+ main .analise .inconsistencia{
+ 
+    flex: 40%;
+     margin-left: 2%;
+    display: inline-block;
+    height:75vh;
+    border-radius: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 0 0 rgba(0,0, 0, 0.19);
+       
+        overflow: auto;
+       
+
+}
+
+main .analise .inconsistencia span {
+font-size: 18px;
+font-weight: bolder;
+text-align: center;
+
+margin-top:4%;
+display:block;
+
+}
+
+
+
+main .analise .inconsistencia .tabela {
+
+    
+ padding: 0 1%;
+ overflow: auto;
+height: 40%;
+}
+
+main .analise .inconsistencia .ocorrencia{
+margin-top: 15px;
+    display: inline-block;
+    border-radius: 10px;
+    background: red;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+  font-weight: bold;
+  border: none;
+}
+
+main .analise .inconsistencia .formulario-inc{
+    
+    margin: 3% 10% 1%;
+
+    text-align:start;
+}
+main .analise .inconsistencia .formulario-inc h5 {
+    text-align: center;
+    margin-bottom: 1.5%;
+
+}
+main .analise .inconsistencia .formulario-inc input{
+    text-align: start;
+}
+main .analise .inconsistencia .formulario-inc span{
+    font-weight: 200;
+}
+
+
+
+@media screen  and (max-width:600px){
+    header{
+    height: 50px;
+    }
+    .siderbar{
+        width: 14%;
+    }
+    .siderbar ul{
+    padding: 0;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.siderbar ul li{
+
+margin: 0;
+padding-top:20px;
+}
+.siderbar ul li .icon{
+text-align: center;
+}
+
+.siderbar  ul .mini{
+    display: block;
+
+}
+  
+    @keyframes anima{
+        from{background-color: #2B2B2B;width: 14%;}
+        to{background-color: rgb(19, 16, 16);  width:20%;}
+
+
+    }
+
+    main{
+        margin-left: 14%;
+        overflow-y: auto; 
+        overflow-x: hidden;
+
+        height: 720px;
+   }
+ 
+.transicao-sider-mini{
+
+animation-name:anima;
+
+    }
+    
+.transicao-sider-mini ul li .titulo{
+   
+    color: white;
+    font-weight: bold;
+    
+}
+
+.menu{
+    display: none;
+}
+  
+main .formulario{
+    width: 36vh;
+    height: 55vh;
+
+    
+}
+
+main #form-deta{
+    margin-top: 40px;
+    
+}
+
+
+.butao-salvar{
+    margin-left: 34%;
+}
+.cont-dash-1{
+    flex-flow: column wrap;
+}
+.cont-dash-1 .inser-mes {
+    margin-bottom: 10px;
+}
+.quanto-sexo{
+    margin-bottom: 10px;
+}
+
+
+
+.cont-dash-2{
+    flex-flow: column wrap;
+} 
+
+.indice-idade {
+    margin-bottom: 10px;
+    
+}
+.quanti-dados{
+    margin-bottom: 10px;
+
+}
+}

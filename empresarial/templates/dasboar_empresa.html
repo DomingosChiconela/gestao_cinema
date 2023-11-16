@@ -1,0 +1,263 @@
+{% extends 'bases/base_empresa.html' %}
+{% load static %}
+{% block 'head' %}{% endblock %}
+<title>{% block 'title' %} Dashboard_empresa{% endblock %}</title>
+
+<style>
+    #main {
+       
+        margin-top:0; 
+        margin-right:0;
+        overflow:auto;
+        position:relative;
+
+    }
+    
+    
+</style>
+{% block 'body' %}  
+{% if messages %}
+
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+
+
+
+
+
+<div class="cont-dash-1">
+    <div class="inser-mes" style="flex: 30%;">
+        <canvas id="mes" style="width: 30vh;     height:20vh "></canvas>
+    </div>
+    
+    <div class="quanto-sexo" style="flex: 20%;">
+        <canvas id="sexo" style="width: 30vh;  height:20vh ;margin-left:40px" ></canvas>
+
+    </div>
+
+    <div class="numerodado"  style="flex:15%;text-align: left;
+   " >
+   <a href="#" > <span > Total Postos: {{total_posto}}  </span> </a>
+   <a href="#" > <span > Total BI: {{total_bis}}  </span> </a>
+
+    <a href="#"> <span style="padding-top: 0;margin-top: 0;">Total incosistencias:<span style="color: red;display: inline-block;">  {{ total_incosistencias}}</span> </span></a>
+    </div>
+    </div>
+    <div class="cont-dash-2">
+      
+    <div class="indice-idade">
+        <canvas id="idade" style="width: 28vh;  height:19vh"></canvas>
+    </div>
+       
+    <div class="quanti-dados " >
+        <canvas id="total-dados" style="width: 26vh;  height:19vh"></canvas>
+    </div>
+    
+    
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+        
+    <script>
+        
+          let ctx = document.getElementById("mes");
+      
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: {{labels|safe}},
+              datasets: [{
+                label: '# Inserções por mês',
+                data: {{values|safe}},
+                borderWidth: 1
+              }]
+            },
+            options: {
+              animation: {
+                duration: 5000,
+              },
+              scales: {
+                y: {
+                 
+                  display: true, // Remover a grade no eixo Y
+                },
+                x: {
+                
+                  display: true , // Remover a grade no eixo X
+                },
+              },
+              layout: {
+                padding: {
+                  left: 40
+                }
+              },
+              legend: {
+                position: "bottom",
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Custom Chart Title'
+              },
+              responsive: true
+            }
+          });
+        
+        
+        
+          {    
+            let ctx=document.getElementById("sexo")
+         
+            var sexo= new Chart(ctx, {
+              type: 'pie',
+              data: {
+                labels:{{label_sexo|safe}},
+                datasets: [{
+                  label: '#Quantidade por sexo ',
+                  data:  {{valor_sexo|safe}},
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  
+                },
+                responsive:true 
+              }
+            });  }  
+        
+      
+  
+            {
+              let ctx=document.getElementById("idade")
+              
+       new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels:{{labelIdadeFemenino|safe}},
+          datasets: [{
+            label: ' Quantidade de BIs do sexo femenino por faixa etaria ',
+            data:{{valueIdadeFemenino}},
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor:'rgba(255, 99, 132, 1)' ,
+            borderWidth: 2,
+          },
+          {
+            label: 'Quantidade de BIs do sexo masculino por faixa etaria',
+            data:{{valueIdadeMasculino|safe}},
+            borderColor: 'rgba(0, 0, 255, 1)',
+            backgroundColor: 'rgba(0, 0, 255, 1)',
+            borderWidth: 2,
+          }
+          ]},
+          options: {
+            animations: {
+              tension: {
+                duration: 1000,
+                easing: 'linear',
+                from: 1,
+                to: 0,
+                loop: true
+              }
+            },
+            title: {
+              display: true,
+              text: 'Custom Chart Title',
+              fonteSize:20,
+              color:'rgba(255, 943,6,4)',
+          },
+          labels:{
+            fontStyle:'bold'
+          },
+            Animation:{
+              duration:5000,
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+        
+            layout:{
+              padding:{
+                left:40
+              },
+        
+            },
+            responsive:true 
+        
+          },
+          responsive:true 
+      
+      });
+            } 
+            
+            {
+              let ctx=document.getElementById("total-dados")
+      
+              var sexo= new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: {{labelIdade|safe}},
+                  datasets: [{
+                    label: 'Quantidade por faixa etaria',
+                    data: {{valueIdade|safe}},
+            
+                    borderWidth: 3,
+                   
+                  }]
+                },
+                options: {
+                  animations: {
+                    tension: {
+                      duration: 1000,
+                      easing: 'linear',
+                      from: 1,
+                      to: 0,
+                      loop: true
+                    }
+                  },
+                  scales: {
+                    y: { // defining min and max so hiding the dataset does not change scale range
+                      min: 0,
+                     
+                    }
+                  },
+                  
+                  layout:{
+                    padding:{
+                      left:50
+                    }
+              
+                    
+                 
+                },
+              
+                title: {
+                  display: true,
+                  text: 'Custom Chart Title',
+                  color:'white',
+              },
+                 responsive:true 
+              }
+              }); 
+            }
+          
+          
+      </script>
+ 
+{% endblock %}

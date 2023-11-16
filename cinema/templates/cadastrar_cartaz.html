@@ -1,0 +1,62 @@
+{% extends 'bases/base_cinema.html' %}
+{% load static %}
+{% block 'head' %}
+<style>
+
+
+</style>
+
+{% endblock %}
+<title>{% block 'title' %}cadastrar_cartaz {% endblock %}</title>
+
+
+{% block 'body' %}
+<br>
+<br>
+{% if messages %}
+    
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+<br>
+
+<div class="formulario" style="width: 45%;height: 50vh;">
+    <br>
+<div class="form">
+<form action="" method="POST" enctype='multipart/form-data'> {% csrf_token %}
+
+    <label >Filmes</label>
+    <select style="margin-bottom: 10px;" class="select form-control " multiple name="filmes">
+       {% for filme in filmes %}
+       <option class="opt" value="{{filme.id}}">{{filme.titulo}}</option>
+   {% endfor %}
+   </select>
+
+
+   <label >Molde</label>
+          
+   <input type="file" placeholder="Ícone" name="molde" class="form-control" required>
+</div> 
+
+
+    <div class="butao-salvar"  style="margin-left: 45%;">
+<button   style="background:deepskyblue; border:none;" type="submit"  class="btn-principal">Salvar</button>
+
+    </div>
+                     
+                
+
+ 
+</form>
+</div>
+
+</div>
+{% endblock %}

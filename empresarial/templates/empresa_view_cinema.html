@@ -1,0 +1,135 @@
+{% extends 'bases/base_empresa.html' %}
+{% load static %}
+{% block 'head' %}
+
+<style>
+
+    label{
+        color:white;
+    }
+    #fil:hover{
+        font-size:15px;
+      }
+      #ad:hover{
+        font-size:15px;
+      }
+</style>
+{% endblock %}
+<title>{% block 'title' %} empresa_view_cinema{% endblock %}</title>
+{% block 'body' %} 
+
+
+{% if messages %}
+
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+
+<br>
+<div class="des" style="background-color: rgb(44, 43, 43);padding: 50px; ;border-radius: 20px;padding-top: 0;margin-top: 10px;">
+   
+<div class="filtros" style="padding-top: 40px;">
+ <form action="." method="GET">
+<div class="row">
+    
+        <a id="ad" href="{% url 'empresa_cadastro_cinema'  %}"  class="btn-principal"><i class="fa-solid fa-user-plus"></i><span > Adicionar</span>  </a>
+  
+        <a href="{% url 'empresa_view_cinema'  %}"  id="fil"   style="border: 3px solid rgb(252, 60, 92);"> <span style=" text-align: center;" type="submit"  >Zerar Filtro </span></a>
+         
+   
+    
+         <input  style="border: 3px solid #69D2CD;" type="submit" id="fil"   class=".btn-principal " value="Filtrar">
+
+    <div class=" col-sm-2 col-md-2  col-lg-2 "  id="flu">
+        <label >Nome do cinema</label>
+        <input type="text" class="form-control" placeholder="Filtrar pelo nome ..." name="nome">
+    </div>
+
+    <div class="col-sm-2 col-md-2  col-lg-2   ">
+        <label >Provincia</label>
+        <input type="text"  class="form-control" name="provincia" placeholder="Filtrar pela provincia do cinema..."  >
+    </div>
+    <div class=" col-sm-2 col-md-2  col-lg-2">
+
+        <label >Distrito</label>
+        <input type="text"  class="form-control" name="distrito" placeholder="Filtrar pelo distrito do cinema...">
+    </div>
+   
+    <div class=" col-sm-2 col-md-2  col-lg-2">
+        <label >Bairro</label>           
+    <input type="text" class="form-control" placeholder="Filtrar pelo bairro do cinema..." name="bairro">  
+    </div>
+</form>
+
+</div>
+
+
+
+ 
+  
+
+</div>
+
+
+<div class="tabela"  >
+<table class="table table-dark    table-hover  ">
+    <thead>
+        <tr>
+          <th scope="col">Nome do cinema</th>
+          <th scope="col">capacidade lotação</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Distrito</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Detalhes</th>
+          <th scope="col">Remover</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for cinema in  cinemas %}
+
+        <tr>
+       
+          <th scope="row"> {{cinema.nome}}</th>
+          <td>{{cinema.capacidade_lotacao}}</td>
+          <td>{{cinema.provincia}}</td>
+          <td>{{cinema.distrito}}</td>
+            <td>{{cinema.bairro}}</td> 
+          
+        <td> <a  href="{% url 'detalhes_cinema' cinema.id %}" ><i style="color: deepskyblue;font-size:20px; " class="fa-solid fa-eye"></i></a></td>
+        
+          <td> <a class="deletar "  name="estado"  value="False"  href="#"> Deletar</a></td>
+          <td> <a  class="editar"href="{% url 'editar_cinema' cinema.id %} "> Editar</a></td>
+        </tr>
+         {% endfor %}
+        
+      </tbody>
+  </table>
+  
+</div>
+<br>
+<div style="margin-left: 45%; "  class="pagination">
+    <span class="step-links">
+        {% if  bi_pag.has_previous %}
+            <a style="text-decoration: none; font-weight: bold; display: inline-block;margin-right:10px;font-size:22px; "  href="?pagina={{  bi_pag.previous_page_number }}"><<</a>
+        {% endif %}
+        
+        {% if  bi_pag.paginator.count >  bi_pag.paginator.per_page %}
+            <span style="display: inline-block; font-size: 20px; color: white;" class="current-page">{{ bi_pag.number }}</span>
+         {% endif %}
+        {% if  bi_pag.has_next %}
+            <a style=" text-decoration: none; font-weight: bold;; display: inline-block;margin-left:10px;font-size:22px;" href="?pagina={{  bi_pag.next_page_number }}">>></a>
+        {% endif %}
+    </span>
+</div>
+</div>
+<br>
+{% endblock %}

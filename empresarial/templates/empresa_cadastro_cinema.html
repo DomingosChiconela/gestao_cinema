@@ -1,0 +1,83 @@
+{% extends 'bases/base_empresa.html' %}
+{% load static %}
+{% block 'head' %}{% endblock %}
+<title>{% block 'title' %}empresa_cadastro_cinema{% endblock %}</title>
+
+
+{% block 'body' %}
+<br>
+<br>
+{% if messages %}
+    
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+<br>
+<br>
+<div class="formulario" style="width: 50%;background:  rgb(44, 43, 43);color:white; height: 40%;">
+ 
+    <br>
+<div class="form">
+<form action="." method="POST"> {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <label >Username</label>
+            <input type="text"  class="form-control"   placeholder="Digite o username do cinema..."name="username">
+        </div>
+    
+        <div class="col-md-6">
+            <label >Email</label>           
+            <input type="email" class="form-control" placeholder="Digite o email do cinema..." name="email">
+        </div>   
+    </div>  
+
+     <label >Nome do cinema</label>
+        <input type="text"  class="form-control" placeholder="Digite o nome  do cinema..."  name="nome"> 
+        
+        
+<div class="row">
+    <div class="col-md-6">
+        <label >Provincia</label>
+        <input type="text"  class="form-control" name="provincia" placeholder="Digite a provincia do cinema..."  >
+    </div>
+
+    <div class="col-md-6">
+        <label >capacidade lotação</label>
+        <input type="number"  class="form-control" placeholder="Digite o nome  do cinema..."  name="capacidade_lotacao"> 
+    </div>   
+</div>  
+
+<div class="row">
+    <div class="col-md-6">
+<label >Distrito</label>
+        <input type="text"  class="form-control" name="distrito" placeholder="Digite o distrito do cinema...">
+    
+    </div>
+    <div class="col-md-6">
+    <label >Bairro:</label>           
+    <input type="text" class="form-control" placeholder="Digite o bairro do cinema..." name="bairro">  
+    
+    </div >  
+   </div>
+    <div class="butao-salvar"  style="margin-left: 45%;">
+<button   style="background:deepskyblue; border:none;" type="submit"  class="btn-principal">Cadastrar</button>
+
+    </div>
+                     
+                
+
+ 
+</form>
+</div>
+
+</div>
+{% endblock %}

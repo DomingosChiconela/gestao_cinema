@@ -1,0 +1,87 @@
+{% extends 'bases/base_cinema.html' %}
+{% load static %}
+{% block 'head' %}
+
+<style>
+
+    span{
+        margin-bottom: 10px;
+    }
+</style>
+
+{% endblock %}
+<title>{% block 'title' %} view_perfil_cinema{% endblock %}</title>
+
+
+{% block 'body' %}   
+
+{% if messages %}
+    <div >
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+<br>
+<br>
+<div style=" height: 50vh; background: rgb(46, 43, 43); color:white; "   class="formulario">
+
+<div class="form">
+
+    <form method="POST"> {% csrf_token %}
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <label >Username</label>
+        <span  class="form-control">{{cinema.usuario.username}}</span>
+    </div>
+
+    <div class="col-md-6">
+        <label >Email</label>           
+        <span  class="form-control">{{cinema.usuario.email}}</span>
+    </div>   
+</div>  
+<label >Nome do cinema</label>
+<span  class="form-control">{{cinema.nome}}</span>
+
+
+<div class="row">
+<div class="col-md-6">
+<label >Provincia</label>
+<span   class="form-control">{{cinema.provincia}}</span>
+</div>
+
+<div class="col-md-6">
+<label >Distrito</label>
+<span  class="form-control">{{cinema.distrito}}</span>
+</div>   
+</div>  
+
+<div class="row">
+<div class="col-md-6">
+ 
+<label >Bairro:</label>           
+<span  class="form-control">{{cinema.bairro}}</span>
+</div>
+<div class="col-md-6">
+    <label >capacidade lotação</label>
+    <span  class="form-control">{{cinema.capacidade_lotacao}}</span>
+
+</div>  
+</div>
+     
+ 
+</div>
+</form>
+
+</div>
+
+{% endblock %}

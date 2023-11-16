@@ -1,0 +1,130 @@
+{% extends 'bases/base_cinema.html' %}
+{% load static %}
+{% block 'head' %}
+
+
+{% endblock %}
+<title>{% block 'title' %} view_cartaz {% endblock %}</title>
+
+{% block 'notificacao' %}{% endblock %}
+{% block 'body' %} 
+
+
+{% if messages %}
+
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+
+<br>
+<div class="filtros">
+ <form action="." method="GET">
+<div class="row">
+    
+        <a id="ad" href="{% url 'cadastrar_cartaz'  %}"  class="btn-principal"><i class="fa-solid fa-plus"></i><span > Adicionar</span>  </a>
+  
+        <a href="#"  id="fil"   style="border: 3px solid rgb(252, 60, 92);"> <span style=" text-align: center;" type="submit"  >Zerar Filtro </span></a>
+         
+   
+    
+         <input  style="border: 3px solid #69D2CD;" type="submit" id="fil"   class=".btn-principal " value="Filtrar">
+
+    <div class=" col-sm-2 col-md-2  col-lg-2 "  id="flu">
+        <label >Nome</label>
+        <input type="text" class="form-control" placeholder="Filtrar pelo nome ..." name="nome">
+    </div>
+
+    <div class="col-sm-2 col-md-2  col-lg-2   ">
+
+        <label >Data de Emissão</label>
+        <input type="date" name="data_emissao" class="form-control" >
+    </div>
+    <div class=" col-sm-2 col-md-2  col-lg-2">
+
+        <label >Sexo</label>
+        <select name="sexo" class="form-select">
+            <option value="">Filtrar pelo sexo</option>
+            <option value="M"> Masculino</option>
+            <option value="F"> Femenino</option>
+        </select>
+    </div>
+   
+    <div class=" col-sm-2 col-md-2  col-lg-2">
+        <label >Naturalidade</label>
+        <input type="text"  class="form-control"placeholder="Filtrar pela naturalidade ..." name="naturalidade">
+    </div>
+</form>
+
+</div>
+
+
+
+ 
+  
+
+</div>
+
+
+<div class="tabela"  >
+<table class="table table-dark    table-hover  ">
+    <thead>
+        <tr>
+          <th scope="col">iD</th>
+          
+          <th scope="col">Criado por</th>
+          <th scope="col">Data de criação</th>
+          <th scope="col">Ultima  atualização</th>
+          <th scope="col">Detalhes</th>
+          <th scope="col">Remover</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for cartaz in cartazes %}
+
+        <tr>
+       
+          <th scope="row"> {{cartaz.id}}</th>
+          
+            <td>{{cartaz.cinema}}</td> 
+            <td>{{cartaz.create_at}}</td> 
+            <td>{{cartaz.updated_at}}</td> 
+      
+
+        
+        <td> <a  href="#" ><i style="color: deepskyblue;font-size:20px; " class="fa-solid fa-eye"></i></a></td>
+        
+          <td> <a class="deletar "  name="estado"  value="False"  href="#"> Deletar</a></td>
+          <td> <a  class="editar"href="#"> Editar</a></td>
+        </tr>
+         {% endfor %}
+         
+      </tbody>
+  </table>
+  
+</div>
+<br>
+<div style="margin-left: 45%; "  class="pagination">
+    <span class="step-links">
+        {% if  bi_pag.has_previous %}
+            <a style="text-decoration: none; font-weight: bold; display: inline-block;margin-right:10px;font-size:22px; "  href="?pagina={{  bi_pag.previous_page_number }}"><<</a>
+        {% endif %}
+        
+        {% if  bi_pag.paginator.count >  bi_pag.paginator.per_page %}
+            <span style="display: inline-block; font-size: 20px;" class="current-page">{{ bi_pag.number }}</span>
+         {% endif %}
+        {% if  bi_pag.has_next %}
+            <a style=" text-decoration: none; font-weight: bold;; display: inline-block;margin-left:10px;font-size:22px;" href="?pagina={{  bi_pag.next_page_number }}">>></a>
+        {% endif %}
+    </span>
+</div>
+<br>
+{% endblock %}

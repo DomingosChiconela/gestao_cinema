@@ -1,0 +1,75 @@
+*{
+    box-sizing: border-box;
+
+}
+
+
+body{
+
+    background-image: url('/static/posto/img/bg.png');
+    background-size: cover;
+
+}
+#logo{
+    width: 25%;
+    margin: 1% 0 0 1%;
+}
+.imagens{
+   width: 40%;
+   
+    padding: 1%;
+    border-radius: 15px;
+    text-align: center;
+    margin-left: 30%;
+    margin-top: 1%;
+   
+
+}
+.butoes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+ 
+    width: 30%;
+    margin-left: 35%;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1%;
+
+}
+.voltar{
+    display: inline-block;
+    flex: 3%;
+    padding: 1.25%;
+    text-decoration: none;
+    border: 1px solid darkturquoise;
+    margin-right: 20%;
+    text-align: center;
+    background-color:rgba(217, 217, 217, .14);
+    color: white;
+    border-radius: 20px;
+    
+}
+.voltar a {
+    display: inline-block;
+    padding: 2% 35%;
+ 
+    text-decoration: none;
+    color: white;
+}
+
+
+.exportar{
+    flex: 4%;
+   
+    display: inline-block;
+    padding: 2%;
+    text-decoration: none;
+    background-color: deepskyblue;
+    border-radius: 20px;
+   
+    text-align: center;
+color: white;
+ 
+}
