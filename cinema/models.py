@@ -116,8 +116,12 @@ class Sessao(models.Model):
   updated_at=models.DateTimeField( verbose_name='Data_atualização',auto_now=True)
   cinema=models.ForeignKey(Cinema, on_delete=models.SET_NULL, null=True,blank=True)
   
+  
   def __str__(self):
       return  str(self.inicio )+"---"+str(self.fim) +"_"+str(self.data)
+    
+    
+
   
 
 class Bilhete(models.Model):

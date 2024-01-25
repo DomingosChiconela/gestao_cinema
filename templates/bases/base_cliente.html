@@ -17,8 +17,20 @@
     {% block 'head' %}{% endblock %}
 </head>
 <body>
-    
-<img style="width: 15%;margin: 1% 0 0 1%;" src="{% static 'cinema/img/logo.png' %}" alt="logo">
+    <div class="nav" style="display: flex;">
+        <div class="logo "style="padding: 20px;">
+<img style="width: 40%;margin: 1% 0 0 1%; height:9vh;" src="{% static 'cinema/img/logo.png' %}" alt="logo">
+</div>
+
+ <div class="menu" style="">
+                    <ul>
+                       <a href="#"><li> <i class="fa-solid fa-user"></i></li></a> 
+                       <a href="#"><li><span  id="noti">{% block 'notificacao' %}{% endblock %}</span> <i class="fa-solid fa-bell"></i> </li></a> 
+                       <a href="{% url 'sair'  %}"><li id="sair"> <i class="fa-solid fa-right-from-bracket"></i>  </li></a> 
+                    </ul>
+
+            </div>
+</div>
     {% block 'body' %}{% endblock %}
 
 

@@ -9,19 +9,19 @@ from django.contrib import auth
 import re
 from django.contrib.auth.decorators import login_required
 from usuarios.models import Users
-
+from rolepermissions.decorators import has_permission_decorator
 from empresarial.models import Empresa
-from cinema.models import Bilhete,Cartaz,Sessao
+from cinema.models import Bilhete,Cartaz,Sessao,Filme
 from django.http import HttpResponse, FileResponse
 
 
 
 
-
+@login_required
+@has_permission_decorator('Visualizar_cartaz')
 def home( request):
     
     if request.method=='GET':
         cartazes=Cartaz.objects.all()
-        for car in cartazes:
-            print(car.imagem_cartaz.url)
-        return render(request,'home.html',{'cartazes':cartazes})
+        filmes=Filme.objects.all()
+        return render(request,'home.html',{'cartazes':cartazes,'filmes':filmes})

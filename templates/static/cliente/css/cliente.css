@@ -9,4 +9,64 @@ body{
     background-image: url('/static/cliente/img/bg2.png');
     background-size: cover;
 
+ 
+
+}
+
+
+.logo{
+flex:40%;
+
+     text-align: left;
+
+}
+
+.logo img{
+    width: 40%;
+    height: 40%;
+  
+    margin-left: 1%;
+}
+
+.menu{
+flex: 50%;
+
+
+
+}
+.menu ul{
+    list-style: none;
+   
+    text-align: right;
+    margin: auto;
+    padding: 20px;
+    
+
+
+
+
+}
+.menu ul li{
+    display: inline-block;
+    margin-right: 3%;
+    border-radius: 30px;
+    padding: 10px;
+    border: 1px solid #1a4b77;
+
+    color: white;
+   
+   
+}
+
+
+ ul li i{
+    font-size: 20px;
+
+}
+.menu ul li:hover{
+    color:white;
+    background: #1b4365;
+}
+.menu ul  #sair{
+    margin-right: 9%;
 }

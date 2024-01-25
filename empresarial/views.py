@@ -9,17 +9,46 @@ from django.contrib import auth
 import re
 from django.contrib.auth.decorators import login_required
 from usuarios.models import Users
-from cinema.models import Cinema
+from cinema.models import Cinema,Cartaz,Bilhete,Sessao,Filme
 from.models import Empresa
 from.utils import gerar_senha_aleatoria,gerar_pdf_cadastro_cinema
 from django.http import HttpResponse, FileResponse
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+from datetime import datetime,date
 
 
-
+@login_required
 def dasboar_empresa( request):
-    
+    empresa_id_do_usuario = Empresa.objects.filter(usuario=request.user).values_list('id', flat=True).first()
     if request.method=='GET':
-        return render(request,'dasboar_empresa.html')
+        
+        cartazes =Cartaz.objects.all()
+    
+       
+        ano_atual = datetime.now().year
+        cartazes_ano_atual = cartazes.filter(create_at__year=ano_atual)
+
+        # Agregar dados por mês e ano
+        cartazes_agregados =cartazes_ano_atual.annotate(
+            mes_ano=TruncMonth('create_at')
+            ).values('mes_ano').annotate(
+                  total=Count('id')
+            )
+
+        # Criar um dicionário com meses e valores totais
+        Cartazes= {}
+        for item in  cartazes_agregados:
+                  mes_ano = item['mes_ano'].strftime('%b %Y')
+                  total = item['total']
+                  Cartazes[mes_ano] = total  
+                  
+        total_cinema=Cinema.objects.filter(empresa=empresa_id_do_usuario).count()        
+        total_cartaz=Cartaz.objects.all().count()
+        total_filme=Filme.objects.all().count()
+        total_sessao=Sessao.objects.all().count()
+                  
+        return render(request,'dasboar_empresa.html', {'total_cinema':total_cinema,'total_cartaz':total_cartaz,'total_filme':total_filme, ' total_sessao': total_sessao})
     
 def empresa_view_cinema(request ):
       
@@ -72,7 +101,7 @@ def empresa_cadastro_cinema(request):
                              bairro=bairro,)
             cinema.save() 
             
-            return FileResponse(gerar_pdf_cadastro_cinema(senha,user.username,user.email,cinema.nome, cinema.capacidade_lotacao,cinema.provincia, cinema.distrito,cinema.bairro), filename="info_cadastro_posto.pdf")
+            return FileResponse(gerar_pdf_cadastro_cinema(senha,user.username,user.email,cinema.nome, cinema.capacidade_lotacao,cinema.provincia, cinema.distrito,cinema.bairro), filename=f"info_cadastro_cinema_{nome_cinema}.pdf")
     
     
 def editar_cinema(request,id):

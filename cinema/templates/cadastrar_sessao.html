@@ -1,0 +1,58 @@
+{% extends 'bases/base_cinema.html' %}
+{% load static %}
+{% block 'head' %}
+<style>
+
+
+</style>
+
+{% endblock %}
+<title>{% block 'title' %}cadastrar_sessao {% endblock %}</title>
+
+
+{% block 'body' %}
+<br>
+<br>
+{% if messages %}
+    
+        {% for message in messages %}
+            <div id="mensagem-container" class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+    <script> setTimeout(function(){
+        var mensagemContainer = document.getElementById('mensagem-container');
+        if (mensagemContainer) {
+            mensagemContainer.style.display="none"; 
+        }
+    },3000);</script>
+{% endif %}
+<br>
+
+<div class="formulario" style="width: 45%;height: 50vh;">
+    <br>
+<div class="form">
+<form action="" method="POST" enctype='multipart/form-data'> {% csrf_token %}
+
+    <label >Data</label>
+    <input type="date" class="form-control" placeholder="Digite a duração da sessao ..." name="data">
+
+    <label >Hora de inicio</label>
+    <input type="time" class="form-control" placeholder="Digite a duração da sessao ..." name="inicio">
+
+    <label >Hora de fim</label>
+    <input type="time" class="form-control" placeholder="Digite a duração da sessao ..." name="fim">
+
+
+    <div class="butao-salvar"  style="margin-left: 45%;">
+<button   style="background:deepskyblue; border:none;" type="submit"  class="btn-principal">Salvar</button>
+
+    </div>
+                     
+                
+
+ 
+</form>
+</div>
+
+</div>
+{% endblock %}

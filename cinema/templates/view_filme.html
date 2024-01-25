@@ -4,7 +4,7 @@
 
 
 {% endblock %}
-<title>{% block 'title' %} view_bi {% endblock %}</title>
+<title>{% block 'title' %} view_filme {% endblock %}</title>
 
 {% block 'notificacao' %}{% endblock %}
 {% block 'body' %} 
@@ -38,28 +38,24 @@
          <input  style="border: 3px solid #69D2CD;" type="submit" id="fil"   class=".btn-principal " value="Filtrar">
 
     <div class=" col-sm-2 col-md-2  col-lg-2 "  id="flu">
-        <label >Nome</label>
-        <input type="text" class="form-control" placeholder="Filtrar pelo nome ..." name="nome">
+        <label >Titulo</label>
+        <input type="text" class="form-control" placeholder="Filtrar pelo titulo  ..." name="titulo">
     </div>
 
     <div class="col-sm-2 col-md-2  col-lg-2   ">
 
-        <label >Data de Emissão</label>
-        <input type="date" name="data_emissao" class="form-control" >
+        <label >Duração</label>
+        <input type="time" name="data_emissao" class="form-control" >
     </div>
     <div class=" col-sm-2 col-md-2  col-lg-2">
 
-        <label >Sexo</label>
-        <select name="sexo" class="form-select">
-            <option value="">Filtrar pelo sexo</option>
-            <option value="M"> Masculino</option>
-            <option value="F"> Femenino</option>
-        </select>
+        <label >Gênero</label>
+        <input type="text"  class="form-control"placeholder="Filtrar pelo genero ..." name="genero">
     </div>
    
     <div class=" col-sm-2 col-md-2  col-lg-2">
-        <label >Naturalidade</label>
-        <input type="text"  class="form-control"placeholder="Filtrar pela naturalidade ..." name="naturalidade">
+        <label >Ator</label>
+        <input type="text"  class="form-control"placeholder="Filtrar pelo ator ..." name="naturalidade">
     </div>
 </form>
 

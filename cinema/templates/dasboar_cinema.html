@@ -79,10 +79,10 @@
           new Chart(ctx, {
             type: 'bar',
             data: {
-              labels: {{labels|safe}},
+              labels:{{labels|safe}},
               datasets: [{
-                label: '# Inserções por mês',
-                data: {{values|safe}},
+                label: '# cartaz por mês',
+                data:{{values|safe}},
                 borderWidth: 1
               }]
             },
@@ -118,144 +118,28 @@
           });
         
         
-        
-          {    
+          {
             let ctx=document.getElementById("sexo")
-         
+            
             var sexo= new Chart(ctx, {
               type: 'pie',
               data: {
-                labels:{{label_sexo|safe}},
+                labels: {{label_categoria|safe}},
                 datasets: [{
-                  label: '#Quantidade por sexo ',
-                  data:  {{valor_sexo|safe}},
+                  label: '#Quantidade filme por categoria',
+                  data: {{value_categoria|safe}},
                   borderWidth: 1
                 }]
               },
               options: {
                 scales: {
-                  
+                  y: {
+                    beginAtZero: true
+                  }
                 },
                 responsive:true 
               }
-            });  }  
-        
-      
-  
-            {
-              let ctx=document.getElementById("idade")
-              
-       new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels:{{labelIdadeFemenino|safe}},
-          datasets: [{
-            label: ' Quantidade de BIs do sexo femenino por faixa etaria ',
-            data:{{valueIdadeFemenino}},
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor:'rgba(255, 99, 132, 1)' ,
-            borderWidth: 2,
-          },
-          {
-            label: 'Quantidade de BIs do sexo masculino por faixa etaria',
-            data:{{valueIdadeMasculino|safe}},
-            borderColor: 'rgba(0, 0, 255, 1)',
-            backgroundColor: 'rgba(0, 0, 255, 1)',
-            borderWidth: 2,
-          }
-          ]},
-          options: {
-            animations: {
-              tension: {
-                duration: 1000,
-                easing: 'linear',
-                from: 1,
-                to: 0,
-                loop: true
-              }
-            },
-            title: {
-              display: true,
-              text: 'Custom Chart Title',
-              fonteSize:20,
-              color:'rgba(255, 943,6,4)',
-          },
-          labels:{
-            fontStyle:'bold'
-          },
-            Animation:{
-              duration:5000,
-            },
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            },
-        
-            layout:{
-              padding:{
-                left:40
-              },
-        
-            },
-            responsive:true 
-        
-          },
-          responsive:true 
-      
-      });
-            } 
-            
-            {
-              let ctx=document.getElementById("total-dados")
-      
-              var sexo= new Chart(ctx, {
-                type: 'line',
-                data: {
-                  labels: {{labelIdade|safe}},
-                  datasets: [{
-                    label: 'Quantidade por faixa etaria',
-                    data: {{valueIdade|safe}},
-            
-                    borderWidth: 3,
-                   
-                  }]
-                },
-                options: {
-                  animations: {
-                    tension: {
-                      duration: 1000,
-                      easing: 'linear',
-                      from: 1,
-                      to: 0,
-                      loop: true
-                    }
-                  },
-                  scales: {
-                    y: { // defining min and max so hiding the dataset does not change scale range
-                      min: 0,
-                     
-                    }
-                  },
-                  
-                  layout:{
-                    padding:{
-                      left:50
-                    }
-              
-                    
-                 
-                },
-              
-                title: {
-                  display: true,
-                  text: 'Custom Chart Title',
-                  color:'white',
-              },
-                 responsive:true 
-              }
-              }); 
-            }
+            });}  
           
           
       </script>

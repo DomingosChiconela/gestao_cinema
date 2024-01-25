@@ -21,46 +21,71 @@ from django.core.files.uploadedfile import InMemoryUploadedFile,TemporaryUploade
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from datetime import datetime,date
+from rolepermissions.decorators import has_permission_decorator
 
 
 
-
-
+@login_required
 def dasboar_cinema( request):
     cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first()
     
     if request.method=='GET':
         
         cartazes =Cartaz.objects.filter(cinema=cinema_id_do_usuario)
-    
-        if request.method=='GET':
+        if cartazes:
+       
             ano_atual = datetime.now().year
             cartazes_ano_atual = cartazes.filter(create_at__year=ano_atual)
 
             # Agregar dados por mês e ano
             cartazes_agregados =cartazes_ano_atual.annotate(
-            mes_ano=TruncMonth('create_at')
-            ).values('mes_ano').annotate(
-                  total=Count('id')
-            )
+                mes_ano=TruncMonth('create_at')
+                ).values('mes_ano').annotate(
+                    total=Count('id')
+                )
 
-        # Criar um dicionário com meses e valores totais
+            # Criar um dicionário com meses e valores totais
             Cartazes= {}
             for item in  cartazes_agregados:
-                  mes_ano = item['mes_ano'].strftime('%b %Y')
-                  total = item['total']
-                  Cartazes[mes_ano] = total  
-                  
-                  
+                    mes_ano = item['mes_ano'].strftime('%b %Y')
+                    total = item['total']
+                    Cartazes[mes_ano] = total  
+                    
+                    
             total_cartaz=Cartaz.objects.filter(cinema=cinema_id_do_usuario).count()
             total_filme=Filme.objects.filter(cinema=cinema_id_do_usuario).count()
             total_sessao=Sessao.objects.filter(cinema=cinema_id_do_usuario).count()
-                  
-        return render(request,'dasboar_cinema.html',{'labels': list(Cartazes.keys()), 'values': list(Cartazes.values()),'total_cartaz':total_cartaz,'total_filme':total_filme, ' total_sessao': total_sessao})
+            
+    #-----------------------------------------------------------------------------------
+    #por categoria 
+            categoria={'Terror':0, 'Ficção científica':0,'Ação':0,'Comédia':0,'Drama':0}
+            
+            filmes=Filme.objects.filter(cinema=cinema_id_do_usuario)
+            for filme in filmes:
+                if filme.genero== "terror":
+                    categoria['Terror']+=1
+                    
+                if filme.genero== "ficcao cientifica":
+                    categoria['Ficção científica']+=1
+                    
+                if filme.genero== "acao":
+                    categoria['Ação']+=1
+                    
+                if filme.genero== "comedia":
+                    categoria['Comédia']+=1
+                    
+                if filme.genero== "drama":
+                    categoria['Drama']+=1
+                    
+                label_categoria=list(categoria.keys())
+                value_categoria=list(categoria.values())
+            
+                
+        return render(request,'dasboar_cinema.html',{'labels': list(Cartazes.keys()), 'values': list(Cartazes.values()),'total_cartaz':total_cartaz,'total_filme':total_filme, ' total_sessao': total_sessao,'label_categoria':label_categoria,'value_categoria':value_categoria})
     
     
     
-    
+@login_required  
 def view_perfil_cinema(request):
     cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first()
     
@@ -69,7 +94,7 @@ def view_perfil_cinema(request):
         
         return render(request,'view_perfil_cinema.html',{'cinema':cinema})
     
-    
+@login_required   
 def view_filme(request):
     cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first()
     if request.method=='GET':
@@ -79,7 +104,7 @@ def view_filme(request):
     
 
 
-
+@login_required
 def view_cartaz(request):
     cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first()
     if request.method=='GET':
@@ -91,7 +116,8 @@ def view_cartaz(request):
 
 
 
-
+@login_required
+@has_permission_decorator('cadastrar_filme')
 def cadastrar_filme(request):
     
     
@@ -145,7 +171,8 @@ def cadastrar_filme(request):
     
     
 
-
+@login_required
+@has_permission_decorator('cadastrar_cartaz')
 def cadastrar_cartaz(request):
     cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first() 
     if request.method=="GET":
@@ -245,6 +272,99 @@ def cadastrar_cartaz(request):
             
             messages.add_message(request, constants.SUCCESS, 'Cartaz registado com sucesso  ')  
             return redirect(reverse('view_cartaz'))
+        
+        
+        
+def cadastrar_sessao( request):
+    if request.method=="GET":
+        
+        
+        return render(request, 'cadastrar_sessao.html')
+    
+    elif request.method=="POST":
+        
+        data=request.POST.get('data')
+        inicio=request.POST.get('inicio')
+        fim=request.POST.get('fim')
+        
+        
+        if not data and not inicio and not fim:
+            messages.add_message(request, constants.ERROR, 'Preecha todos os campos do formulario ')  
+            return redirect(reverse('view_sessao'))
+        
+        else:
+            sessao=Sessao(data=data,
+                          inicio=inicio,
+                          fim=fim , 
+            )
+            
+            sessao.save()
+            
+            messages.add_message(request, constants.SUCCESS, 'Sessao registado com sucesso')  
+            return redirect(reverse('view_sessao'))
+    
+            
+      
+        
+        
+    
+    
+        
+def view_sessao( request):
+    
+    cinema_id_do_usuario = Cinema.objects.filter(usuario=request.user).values_list('id', flat=True).first()
+    if request.method=="GET":
+        
+        sessoes=Sessao.objects.filter(cinema=cinema_id_do_usuario)
+        
+        
+        return render(request, 'view_sessao.html',{'sessoes':sessoes})
+    
+    
+    
+def editar_sessao(request, id):
+    try:
+        sessao=Sessao.objects.get(id=id)
+        if request.method=="GET":
+            
+            
+            
+            
+            return render( request,"editar_sessao.html",{'sessao':sessao})
+        
+        
+        elif request.method=="POST":
+            
+            data=request.POST.get('data')
+            inicio=request.POST.get('inicio')
+            fim=request.POST.get('fim')
+            
+            if data and inicio and fim:
+                sessao.data = data
+                sessao.inicio = inicio
+                sessao.fim = fim 
+                sessao.save()
+                
+                messages.add_message(request, constants.SUCCESS,'sessao editada com sucesso')
+                return redirect(redirect('view_sessao'))
+                
+            else: 
+                messages.add_message(request, constants.ERROR, 'A sessao nao existe') 
+                return redirect(reverse('editar_sessao'))
+    
+    except:
+            messages.add_message(request, constants.ERROR, 'A sessao nao existe') 
+            redirect(reverse('view_sessao'))
+        
+            
+    
+    
+
+    
+    
+    
+        
+        
  
             
             
