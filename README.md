@@ -1,1 +1,1 @@
-# gestao_cinema
+# CineManager
